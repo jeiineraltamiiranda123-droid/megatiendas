@@ -267,63 +267,65 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
 </div>
 
 <!-- LOGIN -->
-<div id="scr-login">
-  <div class="login-bg-circle"></div>
-  <div class="login-bg-circle"></div>
-  <div class="login-wrap">
-    <div class="login-logo">
-      <div class="l-badge">🏪</div>
-      <div class="l-brand">MEGA<b>TIENDAS</b></div>
-      <div class="l-sub">Supervisión Operativa</div>
+<div id="scr-login" style="min-height:100svh;background:linear-gradient(145deg,#0D1B2A,#1A2F45);display:flex;align-items:center;justify-content:center;padding:24px">
+  <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:24px;padding:36px 28px;width:100%;max-width:400px">
+
+    <div style="text-align:center;margin-bottom:32px">
+      <div style="width:68px;height:68px;background:#C8102E;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 14px">🏪</div>
+      <div style="font-size:26px;font-weight:800;color:#fff">MEGA<span style="color:#FF6B84">TIENDAS</span></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.4);letter-spacing:3px;margin-top:4px">SUPERVISIÓN OPERATIVA</div>
     </div>
 
-    <!-- STEP 1: SELECT USER -->
-    <div id="step-user">
-      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:14px;text-align:center">¿Quién eres?</div>
-      <div style="display:flex;flex-direction:column;gap:10px">
+    <div style="margin-bottom:12px">
+      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Usuario</div>
+      <input id="li-u" type="text" placeholder="jeiner / kerlys / reinel"
+        autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false"
+        style="width:100%;padding:14px 16px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;color:#fff;font-size:16px;font-family:inherit;outline:none;-webkit-appearance:none"
+        onfocus="this.style.borderColor='#FF4060'" onblur="this.style.borderColor='rgba(255,255,255,.2)'">
+    </div>
 
-        <button onclick="selectUser('jeiner','Jeiner Altamiranda','admin')"
-          style="display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(200,16,46,.2);border:1.5px solid rgba(200,16,46,.4);border-radius:14px;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif">
-          <div style="width:44px;height:44px;background:linear-gradient(135deg,#C8102E,#FF4060);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">👑</div>
-          <div style="text-align:left">
-            <div style="font-size:15px;font-weight:700;color:#fff">Jeiner Altamiranda</div>
-            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">Administrador</div>
+    <div style="margin-bottom:20px">
+      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Contraseña</div>
+      <input id="li-p" type="password" placeholder="••••••••"
+        autocomplete="current-password"
+        style="width:100%;padding:14px 16px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;color:#fff;font-size:16px;font-family:inherit;outline:none;-webkit-appearance:none"
+        onfocus="this.style.borderColor='#FF4060'" onblur="this.style.borderColor='rgba(255,255,255,.2)'">
+    </div>
+
+    <div id="li-err" style="display:none;background:rgba(200,16,46,.2);border:1px solid rgba(200,16,46,.4);color:#FF8FA3;padding:10px 14px;border-radius:10px;font-size:13px;text-align:center;margin-bottom:14px">
+      Usuario o contraseña incorrectos
+    </div>
+
+    <div id="li-btn"
+      style="width:100%;padding:16px;background:#C8102E;color:#fff;border-radius:12px;font-size:16px;font-weight:700;text-align:center;cursor:pointer;-webkit-tap-highlight-color:rgba(200,16,46,.5);user-select:none">
+      Ingresar →
+    </div>
+
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)">
+      <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-bottom:10px">Acceso rápido</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div class="qcard" data-u="jeiner" data-p="Jvaj3201" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(200,16,46,.15);border:1px solid rgba(200,16,46,.3);border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:rgba(200,16,46,.3);user-select:none">
+          <span style="font-size:20px">👑</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#fff">Jeiner Altamiranda</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.4)">Administrador</div>
           </div>
-          <div style="margin-left:auto;color:rgba(255,255,255,.4);font-size:22px">›</div>
-        </button>
-
-        <button onclick="selectUser('kerlys','Kerlys','supervisor')"
-          style="display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.13);border-radius:14px;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif">
-          <div style="width:44px;height:44px;background:linear-gradient(135deg,#1A2F45,#2D4A6B);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">👤</div>
-          <div style="text-align:left">
-            <div style="font-size:15px;font-weight:700;color:#fff">Kerlys</div>
-            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">Supervisora</div>
+        </div>
+        <div class="qcard" data-u="kerlys" data-p="12345" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,.2);user-select:none">
+          <span style="font-size:20px">👤</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#fff">Kerlys</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.4)">Supervisora</div>
           </div>
-          <div style="margin-left:auto;color:rgba(255,255,255,.4);font-size:22px">›</div>
-        </button>
-
-        <button onclick="selectUser('reinel','Reinel','supervisor')"
-          style="display:flex;align-items:center;gap:14px;padding:16px 18px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.13);border-radius:14px;cursor:pointer;width:100%;font-family:'Plus Jakarta Sans',sans-serif">
-          <div style="width:44px;height:44px;background:linear-gradient(135deg,#1A2F45,#2D4A6B);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">👤</div>
-          <div style="text-align:left">
-            <div style="font-size:15px;font-weight:700;color:#fff">Reinel</div>
-            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:2px">Supervisor</div>
+        </div>
+        <div class="qcard" data-u="reinel" data-p="54321" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,.2);user-select:none">
+          <span style="font-size:20px">👤</span>
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#fff">Reinel</div>
+            <div style="font-size:11px;color:rgba(255,255,255,.4)">Supervisor</div>
           </div>
-          <div style="margin-left:auto;color:rgba(255,255,255,.4);font-size:22px">›</div>
-        </button>
-
+        </div>
       </div>
-    </div>
-
-    <!-- STEP 2: PASSWORD (hidden until user selected) -->
-    <div id="step-pwd" style="display:none">
-      <button onclick="backToUsers()" style="background:none;border:none;color:rgba(255,255,255,.5);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:16px;padding:0;display:flex;align-items:center;gap:6px">‹ Cambiar usuario</button>
-      <div id="pwd-user-label" style="font-size:16px;font-weight:700;color:#fff;margin-bottom:18px;text-align:center"></div>
-      <label class="lf-lbl">Contraseña</label>
-      <input class="lf-input" type="password" id="li-p" placeholder="••••••••" autocomplete="current-password">
-      <input type="hidden" id="li-u" value="">
-      <button class="btn-login" onclick="doLogin()">Ingresar →</button>
-      <div class="login-err" id="li-err">Contraseña incorrecta</div>
     </div>
 
   </div>
@@ -485,8 +487,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
   <!-- HISTORY SUPERVISOR -->
   <div id="scr-hist" class="scr">
     <div class="page">
-      <div class="sec-h">Mis Auditorías</div>
-      <div class="sec-s">Historial registrado en este dispositivo</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div class="sec-h">Mis Auditorías</div>
+        <button onclick="exportMyData()" style="padding:8px 14px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-family:Plus Jakarta Sans,sans-serif;font-size:12px;font-weight:700;cursor:pointer">📤 Exportar</button>
+      </div>
+      <div class="sec-s">Exporta tus auditorías para enviarlas a Jeiner</div>
       <div class="filter-row">
         <input type="text" id="hf-q" placeholder="🔍 Buscar..." oninput="renderHist()">
         <select id="hf-type" onchange="renderHist()">
@@ -599,21 +604,12 @@ function hardReset(){
   location.reload();
 }
 
-function selectUser(username, name, role){
-  document.getElementById('li-u').value = username;
-  document.getElementById('li-p').value = '';
-  document.getElementById('pwd-user-label').textContent = '🔐 Hola, ' + name;
-  document.getElementById('step-user').style.display = 'none';
-  document.getElementById('step-pwd').style.display = 'block';
-  setTimeout(function(){ document.getElementById('li-p').focus(); }, 100);
-}
 
-function backToUsers(){
-  document.getElementById('step-pwd').style.display = 'none';
-  document.getElementById('step-user').style.display = 'block';
-  document.getElementById('li-p').value = '';
-  document.getElementById('li-err').style.display = 'none';
-}
+
+/* Attach card events after DOM ready — works on all mobile browsers */
+document.addEventListener('DOMContentLoaded', attachCardEvents);
+/* fallback if DOMContentLoaded already fired */
+if(document.readyState !== 'loading') attachCardEvents();
 
 function tryInitSupa(){
   if(SUPA_URL&&SUPA_KEY&&window.supabase){
@@ -698,19 +694,59 @@ var _cloudData=[];   // datos traídos de Supabase
    LOGIN / LOGOUT
 ══════════════════════════════════════════════════ */
 function doLogin(){
-  var u=document.getElementById('li-u').value.trim().toLowerCase();
-  var p=document.getElementById('li-p').value;
-  var m=USERS.find(function(x){return x.u===u&&x.p===p;});
+  var u = (document.getElementById('li-u').value||'').trim().toLowerCase();
+  var p = document.getElementById('li-p').value||'';
+  var m = USERS.find(function(x){ return x.u===u && x.p===p; });
   if(m){
-    _user=m;
-    localStorage.setItem('mg_sess',JSON.stringify(m));
+    _user = m;
+    localStorage.setItem('mg_sess', JSON.stringify({u:m.u,p:m.p,n:m.n,role:m.role}));
     enterApp();
   } else {
-    var e=document.getElementById('li-err');
-    e.style.display='block';
-    setTimeout(function(){e.style.display='none';},3000);
+    var e = document.getElementById('li-err');
+    e.style.display = 'block';
+    setTimeout(function(){ e.style.display='none'; }, 3000);
   }
 }
+
+function doLogout(){
+  localStorage.removeItem('mg_sess');
+  _user = null;
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('scr-login').style.display = 'flex';
+  document.getElementById('li-u').value = '';
+  document.getElementById('li-p').value = '';
+}
+
+function initLoginEvents(){
+  /* Ingresar button */
+  var btn = document.getElementById('li-btn');
+  if(btn){
+    btn.addEventListener('touchend', function(e){ e.preventDefault(); doLogin(); });
+    btn.addEventListener('click', function(){ doLogin(); });
+  }
+  /* Password enter key */
+  var lp = document.getElementById('li-p');
+  if(lp){ lp.addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); }); }
+  /* Quick cards */
+  document.querySelectorAll('.qcard').forEach(function(card){
+    function go(e){
+      e.preventDefault();
+      document.getElementById('li-u').value = card.getAttribute('data-u');
+      document.getElementById('li-p').value = card.getAttribute('data-p');
+      doLogin();
+    }
+    card.addEventListener('touchend', go);
+    card.addEventListener('click', go);
+  });
+}
+
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initLoginEvents);
+} else {
+  initLoginEvents();
+}
+
+
 document.getElementById('li-p').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 
 function doLogout(){
@@ -908,34 +944,68 @@ function setAns(id,val,catId,isCrit){
 function handlePhoto(id,input){
   var file=input.files[0];
   if(!file)return;
-  // Compress before storing
-  var img=new Image();
+  var imgEl=new Image();
   var reader=new FileReader();
   reader.onload=function(e){
-    img.onload=function(){
+    imgEl.onload=function(){
       var canvas=document.createElement('canvas');
-      var MAX=800;
-      var scale=Math.min(MAX/img.width,MAX/img.height,1);
-      canvas.width=img.width*scale;
-      canvas.height=img.height*scale;
-      canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);
-      var compressed=canvas.toDataURL('image/jpeg',0.7);
+      var MAX=900;
+      var scale=Math.min(MAX/imgEl.width,MAX/imgEl.height,1);
+      canvas.width=imgEl.width*scale;
+      canvas.height=imgEl.height*scale;
+      canvas.getContext('2d').drawImage(imgEl,0,0,canvas.width,canvas.height);
+      var compressed=canvas.toDataURL('image/jpeg',0.75);
       if(!_ans[id])_ans[id]={};
-      _ans[id].photo=compressed;
-      _photos[id]=compressed;
-      var pp=document.getElementById('pp-'+id);
-      pp.innerHTML='';
-      var imgEl=document.createElement('img');
-      imgEl.src=compressed; imgEl.className='photo-thumb';
-      imgEl.setAttribute('data-pid',id);
-      imgEl.addEventListener('click',function(){pvOpen(this.getAttribute('data-pid'));});
-      var hint=document.createElement('div');
-      hint.className='photo-hint'; hint.textContent='🔍 Toca para ampliar';
-      pp.appendChild(imgEl); pp.appendChild(hint);
+      if(!_ans[id].photos)_ans[id].photos=[];
+      // keep up to 5 photos
+      if(_ans[id].photos.length>=5){alert('Máximo 5 fotos por ítem');return;}
+      _ans[id].photos.push(compressed);
+      _ans[id].photo=_ans[id].photos[0]; // backward compat
+      var key=id+'_'+(_ans[id].photos.length-1);
+      _photos[key]=compressed;
+      renderPhotoPreview(id);
     };
-    img.src=e.target.result;
+    imgEl.src=e.target.result;
   };
   reader.readAsDataURL(file);
+}
+
+function renderPhotoPreview(id){
+  var pp=document.getElementById('pp-'+id);
+  pp.innerHTML='';
+  var photos=(_ans[id]&&_ans[id].photos)||[];
+  if(photos.length===0)return;
+  var grid=document.createElement('div');
+  grid.style.cssText='display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:10px';
+  photos.forEach(function(src,i){
+    var key=id+'_'+i;
+    _photos[key]=src;
+    var wrap=document.createElement('div');
+    wrap.style.cssText='position:relative';
+    var img=document.createElement('img');
+    img.src=src;
+    img.style.cssText='width:100%;height:80px;object-fit:cover;border-radius:8px;border:2px solid var(--bd);cursor:zoom-in;display:block';
+    img.addEventListener('click',function(){pvOpen(key);});
+    var del=document.createElement('button');
+    del.textContent='✕';
+    del.style.cssText='position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:rgba(200,16,46,.85);color:#fff;border:none;font-size:10px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0';
+    del.addEventListener('click',function(e){e.stopPropagation();removePhoto(id,i);});
+    wrap.appendChild(img);
+    wrap.appendChild(del);
+    grid.appendChild(wrap);
+  });
+  var hint=document.createElement('div');
+  hint.style.cssText='font-size:10px;color:var(--muted);margin-top:4px;text-align:center';
+  hint.textContent=photos.length+'/5 fotos · toca para ampliar';
+  pp.appendChild(grid);
+  pp.appendChild(hint);
+}
+
+function removePhoto(id,index){
+  if(!_ans[id]||!_ans[id].photos)return;
+  _ans[id].photos.splice(index,1);
+  _ans[id].photo=_ans[id].photos[0]||null;
+  renderPhotoPreview(id);
 }
 
 function pvOpen(id){
@@ -1108,66 +1178,69 @@ function getSig(){return _sigOk?document.getElementById('sig-canvas').toDataURL(
 /* ══════════════════════════════════════════════════
    SAVE — LOCAL + SUPABASE
 ══════════════════════════════════════════════════ */
-async function saveAndHome(){
-  var data={
-    id:Date.now().toString(),
-    auditor_user:_user.u, auditor_name:_user.n,
-    type:_audit.type, regional:_audit.regional, pdv:_audit.pdv,
-    ciudad:_audit.ciudad, admin_tienda:_audit.admin,
-    fecha:_audit.fecha, puntaje:_audit.result.pct,
-    ubicacion:_audit.geo, obs:_audit.obs, firma:getSig(),
-    resultado:{
-      pct:_audit.result.pct,tScore:_audit.result.tScore,
-      tValid:_audit.result.tValid,
-      failures:_audit.result.failures,
-      alerts:_audit.result.alerts,
-      catRes:_audit.result.catRes
-    },
-    synced:false
-  };
-
-  // Save locally always
-  var local=getLocal(); local.push(data);
-  localStorage.setItem('mg_au',JSON.stringify(local));
-
-  // Try Supabase sync
-  var ss=document.getElementById('sync-status');
-  if(_sb){
-    try{
-      ss.innerHTML='<span class="sync-badge sync-ing">⏳ Sincronizando...</span>';
-      var payload={
-        id:data.id, auditor_user:data.auditor_user, auditor_name:data.auditor_name,
-        type:data.type, regional:data.regional, pdv:data.pdv, ciudad:data.ciudad,
-        admin_tienda:data.admin_tienda, fecha:data.fecha, puntaje:data.puntaje,
-        obs:data.obs, geo_lat:data.ubicacion?data.ubicacion.lat:null,
-        geo_lng:data.ubicacion?data.ubicacion.lng:null,
-        geo_acc:data.ubicacion?data.ubicacion.acc:null,
-        failures_json:JSON.stringify(data.resultado.failures||[]),
-        cat_res_json:JSON.stringify(data.resultado.catRes||{}),
-        t_score:data.resultado.tScore, t_valid:data.resultado.tValid
-      };
-      var res=await _sb.from('auditorias').insert(payload);
-      if(res.error)throw res.error;
-      // Mark as synced
-      data.synced=true;
-      var loc2=getLocal().map(function(a){return a.id===data.id?data:a;});
-      localStorage.setItem('mg_au',JSON.stringify(loc2));
-      ss.innerHTML='<span class="sync-badge sync-ok">✅ Guardado en la nube</span>';
-    }catch(e){
-      ss.innerHTML='<span class="sync-badge sync-err">⚠️ Error Supabase — guardado solo localmente</span>';
-    }
+function saveAndHome(){
+  try{
+    var data={
+      id:Date.now().toString(),
+      auditor_user:_user.u, auditor_name:_user.n,
+      type:_audit.type, regional:_audit.regional, pdv:_audit.pdv,
+      ciudad:_audit.ciudad, admin_tienda:_audit.admin,
+      fecha:_audit.fecha, puntaje:_audit.result.pct,
+      ubicacion:_audit.geo, obs:_audit.obs, firma:getSig(),
+      resultado:{
+        pct:_audit.result.pct, tScore:_audit.result.tScore,
+        tValid:_audit.result.tValid,
+        failures:_audit.result.failures,
+        alerts:_audit.result.alerts,
+        catRes:_audit.result.catRes
+      },
+      synced:false
+    };
+    var local=getLocal();
+    local.push(data);
+    localStorage.setItem('mg_au',JSON.stringify(local));
+    var ss=document.getElementById('sync-status');
+    if(ss) ss.innerHTML='<span class="sync-badge sync-ok">✅ Auditoría guardada correctamente</span>';
+    // Try Supabase in background (no-block)
+    if(_sb){ syncToSupabase(data); }
+    setTimeout(function(){ navHome(); }, 800);
+  }catch(err){
+    alert('Error al guardar: '+err.message+'. Intenta de nuevo.');
   }
+}
 
-  setTimeout(function(){
-    navHome();
-  },1200);
+function syncToSupabase(data){
+  try{
+    var payload={
+      id:data.id, auditor_user:data.auditor_user, auditor_name:data.auditor_name,
+      type:data.type, regional:data.regional, pdv:data.pdv, ciudad:data.ciudad,
+      admin_tienda:data.admin_tienda, fecha:data.fecha, puntaje:data.puntaje,
+      obs:data.obs,
+      geo_lat:data.ubicacion?data.ubicacion.lat:null,
+      geo_lng:data.ubicacion?data.ubicacion.lng:null,
+      geo_acc:data.ubicacion?data.ubicacion.acc:null,
+      failures_json:JSON.stringify(data.resultado.failures||[]),
+      cat_res_json:JSON.stringify(data.resultado.catRes||{}),
+      t_score:data.resultado.tScore, t_valid:data.resultado.tValid
+    };
+    _sb.from('auditorias').insert(payload).then(function(res){
+      if(!res.error){
+        var loc=getLocal().map(function(a){return a.id===data.id?Object.assign({},a,{synced:true}):a;});
+        localStorage.setItem('mg_au',JSON.stringify(loc));
+      }
+    });
+  }catch(e){}
 }
 
 /* ══════════════════════════════════════════════════
    LOAD CLOUD DATA (Admin)
 ══════════════════════════════════════════════════ */
 async function loadCloudData(){
-  if(!_sb){_cloudData=getLocal();return;}
+  if(!_sb){
+    // Without Supabase: show all local data for admin
+    _cloudData=getLocal();
+    return;
+  }
   try{
     var res=await _sb.from('auditorias').select('*').order('fecha',{ascending:false});
     if(res.error)throw res.error;
@@ -1297,6 +1370,11 @@ async function renderAdmin(tab){
       +'<div class="reg-bar-lbl"><span>Reinel ('+rData.length+' auditorías)</span><span style="color:'+(rAvg>=90?'var(--grn)':rAvg>=70?'var(--ylw)':'var(--red)')+'">'+rAvg+'%</span></div>'
       +'<div class="reg-bar-bg"><div class="reg-bar-fill" style="width:'+rAvg+'%;background:'+(rAvg>=90?'var(--grn)':rAvg>=70?'var(--ylw)':'var(--red)')+'"></div></div>'
       +'</div></div>'
+      // Import/Export buttons
+      +'<div style="display:flex;gap:8px;margin-bottom:16px">'
+      +'<button onclick="document.getElementById(\"import-input\").click()" style="flex:1;padding:12px;background:#EFF6FF;color:#1D4ED8;border:1.5px solid #BFDBFE;border-radius:10px;font-family:Plus Jakarta Sans,sans-serif;font-size:13px;font-weight:700;cursor:pointer">📥 Importar auditorías</button>'
+      +'<button onclick="exportFullCSV()" style="flex:1;padding:12px;background:var(--grn-bg);color:var(--grn);border:1.5px solid #6EE7B7;border-radius:10px;font-family:Plus Jakarta Sans,sans-serif;font-size:13px;font-weight:700;cursor:pointer">📤 Exportar CSV</button>'
+      +'</div>'
       // Reset button
       +'<button onclick="resetAllData()" style="width:100%;margin-bottom:16px;padding:14px;background:#FEF2F2;color:#991B1B;border:1.5px solid #FECACA;border-radius:12px;font-family:Plus Jakarta Sans,sans-serif;font-size:14px;font-weight:700;cursor:pointer">🗑️ Borrar Todas las Auditorías</button>'
       // Recent all
@@ -1534,6 +1612,67 @@ function exportCSV(){
     });
   });
   downloadCSV(rows,'Auditoria_'+_audit.pdv+'_'+_audit.type+'_'+new Date(_audit.fecha).toISOString().slice(0,10));
+}
+
+/* ══ IMPORT / EXPORT JSON (offline sync) ══ */
+function exportMyData(){
+  var au=getLocal().filter(function(a){return a.auditor_user===_user.u;});
+  if(au.length===0){alert('No tienes auditorías guardadas. Completa y guarda al menos una auditoría primero.');return;}
+  // Strip large photos to keep file small
+  var clean=au.map(function(a){
+    var c=JSON.parse(JSON.stringify(a));
+    if(c.resultado&&c.resultado.failures){
+      c.resultado.failures=c.resultado.failures.map(function(f){
+        return Object.assign({},f,{photo:f.photo?'[foto]':null});
+      });
+    }
+    c.firma=c.firma?'[firma]':null;
+    return c;
+  });
+  var json=JSON.stringify(clean);
+  var url=URL.createObjectURL(new Blob([json],{type:'application/json'}));
+  var lnk=document.createElement('a');
+  lnk.href=url;
+  lnk.download='auditorias_'+_user.u+'_'+new Date().toISOString().slice(0,10)+'.json';
+  lnk.click();
+  URL.revokeObjectURL(url);
+  setTimeout(function(){
+    alert('✅ Archivo descargado.\n\nEnvíalo por WhatsApp a Jeiner para que lo importe en su panel.');
+  },500);
+}
+
+function importData(input){
+  var file=input.files[0];
+  if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var imported=JSON.parse(e.target.result);
+      if(!Array.isArray(imported)){alert('Archivo inválido. Debe ser un archivo .json exportado por un supervisor.');return;}
+      var local=getLocal();
+      var added=0, dupes=0;
+      imported.forEach(function(a){
+        if(!local.find(function(x){return x.id===a.id;})){
+          local.push(a); added++;
+        } else { dupes++; }
+      });
+      localStorage.setItem('mg_au',JSON.stringify(local));
+      _cloudData=local;
+      var msg='✅ Importación completada:
+• '+added+' auditorías nuevas agregadas';
+      if(dupes>0) msg+='
+• '+dupes+' ya existían (no duplicadas)';
+      alert(msg);
+      renderAdmin('overview');
+      document.querySelectorAll('.atab').forEach(function(b,i){b.classList.toggle('on',i===0);});
+    }catch(err){
+      alert('Error al leer el archivo: '+err.message+'
+
+Asegúrate de que sea el archivo .json exportado desde la app.');
+    }
+  };
+  reader.readAsText(file);
+  input.value='';
 }
 
 function exportFullCSV(){
