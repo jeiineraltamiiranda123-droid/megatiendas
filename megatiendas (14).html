@@ -606,11 +606,6 @@ function hardReset(){
 
 
 
-/* Attach card events after DOM ready — works on all mobile browsers */
-document.addEventListener('DOMContentLoaded', attachCardEvents);
-/* fallback if DOMContentLoaded already fired */
-if(document.readyState !== 'loading') attachCardEvents();
-
 function tryInitSupa(){
   if(SUPA_URL&&SUPA_KEY&&window.supabase){
     try{_sb=window.supabase.createClient(SUPA_URL,SUPA_KEY);}catch(e){}
@@ -738,12 +733,6 @@ function initLoginEvents(){
   });
 }
 
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', initLoginEvents);
-} else {
-  initLoginEvents();
-}
-
 function enterApp(){
   document.getElementById('scr-login').style.display='none';
   document.getElementById('app').classList.remove('hidden');
@@ -762,16 +751,7 @@ function enterApp(){
   showScr('dash');
 }
 
-(function restoreSession(){
-  try{
-    var s=localStorage.getItem('mg_sess');
-    if(!s)return;
-    var m=JSON.parse(s);
-    var v=USERS.find(function(x){return x.u===m.u&&x.p===m.p&&x.role;});
-    if(v){_user=v;enterApp();}
-    else{localStorage.removeItem('mg_sess');}
-  }catch(e){localStorage.removeItem('mg_sess');}
-})();
+
 
 /* ══════════════════════════════════════════════════
    NAVIGATION
@@ -1692,6 +1672,30 @@ function downloadCSV(rows,name){
   var lnk=document.createElement('a');
   lnk.href=url;lnk.download=name+'.csv';lnk.click();URL.revokeObjectURL(url);
 }
+
+/* ══════════════════════════════════════════════════
+   INIT — ejecutar al final cuando todo está definido
+══════════════════════════════════════════════════ */
+function _boot(){
+  initLoginEvents();
+  (function restoreSession(){
+    try{
+      var s=localStorage.getItem('mg_sess');
+      if(!s)return;
+      var m=JSON.parse(s);
+      var v=USERS.find(function(x){return x.u===m.u&&x.p===m.p&&x.role;});
+      if(v){_user=v;enterApp();}
+      else{localStorage.removeItem('mg_sess');}
+    }catch(e){localStorage.removeItem('mg_sess');}
+  })();
+}
+
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', _boot);
+} else {
+  _boot();
+}
+
 </script>
 </body>
 </html>
