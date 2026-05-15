@@ -9,7 +9,7 @@
 <title>Megatiendas · Auditoría PDV</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script>window._sbReady=false;</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="window._sbReady=true;tryInitSupa()" onerror="console.warn('Supabase offline')"></script>
+<script>window._sbReady=false;</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="window._sbReady=true;if(typeof tryInitSupa==='function')tryInitSupa();" onerror="console.warn('Supabase offline')"></script>
 <style>
 :root{
   --red:#C8102E;--red-d:#9E0C23;--red-l:#FF4060;
@@ -296,7 +296,7 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
       Usuario o contraseña incorrectos
     </div>
 
-    <button id="li-btn" type="button"
+    <button id="li-btn" type="button" onclick="doLogin()"
       style="width:100%;padding:16px;background:#C8102E;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;text-align:center;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:rgba(200,16,46,.5);touch-action:manipulation">
       Ingresar →
     </button>
@@ -304,21 +304,21 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
     <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)">
       <div style="font-size:11px;color:rgba(255,255,255,.3);text-align:center;margin-bottom:10px">Acceso rápido</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <button type="button" class="qcard" data-u="jeiner" data-p="Jvaj3201" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(200,16,46,.15);border:1px solid rgba(200,16,46,.3);border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:rgba(200,16,46,.3);width:100%;font-family:inherit;touch-action:manipulation">
+        <button type="button" class="qcard" onclick="quickLogin('jeiner','Jvaj3201')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(200,16,46,.15);border:1px solid rgba(200,16,46,.3);border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:rgba(200,16,46,.3);width:100%;font-family:inherit;touch-action:manipulation">
           <span style="font-size:20px">👑</span>
           <div style="text-align:left">
             <div style="font-size:13px;font-weight:700;color:#fff">Jeiner Altamiranda</div>
             <div style="font-size:11px;color:rgba(255,255,255,.4)">Administrador</div>
           </div>
         </button>
-        <button type="button" class="qcard" data-u="kerlys" data-p="12345" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,.2);width:100%;font-family:inherit;touch-action:manipulation">
+        <button type="button" class="qcard" onclick="quickLogin('kerlys','12345')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,.2);width:100%;font-family:inherit;touch-action:manipulation">
           <span style="font-size:20px">👤</span>
           <div style="text-align:left">
             <div style="font-size:13px;font-weight:700;color:#fff">Kerlys</div>
             <div style="font-size:11px;color:rgba(255,255,255,.4)">Supervisora</div>
           </div>
         </button>
-        <button type="button" class="qcard" data-u="reinel" data-p="54321" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,.2);width:100%;font-family:inherit;touch-action:manipulation">
+        <button type="button" class="qcard" onclick="quickLogin('reinel','54321')" style="display:flex;align-items:center;gap:12px;padding:12px 14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;cursor:pointer;-webkit-tap-highlight-color:rgba(255,255,255,.2);width:100%;font-family:inherit;touch-action:manipulation">
           <span style="font-size:20px">👤</span>
           <div style="text-align:left">
             <div style="font-size:13px;font-weight:700;color:#fff">Reinel</div>
@@ -688,27 +688,26 @@ var _cloudData=[];   // datos traídos de Supabase
 /* ══════════════════════════════════════════════════
    LOGIN / LOGOUT
 ══════════════════════════════════════════════════ */
+function quickLogin(u, p){
+  var m = USERS.find(function(x){ return x.u===u && x.p===p; });
+  if(m){ _user=m; try{localStorage.setItem('mg_sess',JSON.stringify({u:m.u,p:m.p,n:m.n,role:m.role}));}catch(e){} enterApp(); }
+}
+
 function doLogin(){
   var u = (document.getElementById('li-u').value||'').trim().toLowerCase();
-  var p = document.getElementById('li-p').value||'';
+  var p = (document.getElementById('li-p').value||'').trim();
   var m = USERS.find(function(x){ return x.u===u && x.p===p; });
-  if(m){
-    _user = m;
-    try{ localStorage.setItem('mg_sess', JSON.stringify({u:m.u,p:m.p,n:m.n,role:m.role})); }catch(e){}
-    enterApp();
-  } else {
-    var err = document.getElementById('li-err');
-    if(err){ err.style.display = 'block'; setTimeout(function(){ err.style.display='none'; }, 3000); }
-  }
+  if(m){ _user=m; try{localStorage.setItem('mg_sess',JSON.stringify({u:m.u,p:m.p,n:m.n,role:m.role}));}catch(e){} enterApp(); }
+  else { var err=document.getElementById('li-err'); if(err){err.style.display='block'; setTimeout(function(){err.style.display='none';},3000);} }
 }
 
 function doLogout(){
-  try{ localStorage.removeItem('mg_sess'); }catch(e){}
-  _user = null;
+  try{localStorage.removeItem('mg_sess');}catch(e){}
+  _user=null;
   document.getElementById('app').classList.add('hidden');
-  document.getElementById('scr-login').style.display = 'flex';
-  document.getElementById('li-u').value = '';
-  document.getElementById('li-p').value = '';
+  document.getElementById('scr-login').style.display='flex';
+  document.getElementById('li-u').value='';
+  document.getElementById('li-p').value='';
 }
 
 function initLoginEvents(){
@@ -1624,17 +1623,13 @@ function importData(input){
       });
       localStorage.setItem('mg_au',JSON.stringify(local));
       _cloudData=local;
-      var msg='✅ Importación completada:
-• '+added+' auditorías nuevas agregadas';
-      if(dupes>0) msg+='
-• '+dupes+' ya existían (no duplicadas)';
+      var msg='✅ Importación completada:\n• '+added+' auditorías nuevas agregadas';
+      if(dupes>0) msg+='\n• '+dupes+' ya existían (no duplicadas)';
       alert(msg);
       renderAdmin('overview');
       document.querySelectorAll('.atab').forEach(function(b,i){b.classList.toggle('on',i===0);});
     }catch(err){
-      alert('Error al leer el archivo: '+err.message+'
-
-Asegúrate de que sea el archivo .json exportado desde la app.');
+      alert('Error al leer el archivo: '+err.message+'\n\nAsegúrate de que sea el archivo .json exportado desde la app.');
     }
   };
   reader.readAsText(file);
