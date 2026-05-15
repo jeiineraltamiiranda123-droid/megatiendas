@@ -888,8 +888,12 @@ function renderCL(){
       html+='<button class="btn-ans" id="ba-na-'+item.id+'" onclick="setAns(\''+item.id+'\',\'NA\',\''+cat.id+'\',false)" style="max-width:66px">N/A</button>';
       html+='</div>';
       html+='<div id="ca-'+item.id+'" class="cli-alert" style="display:none">🚨 Ítem crítico — requiere acción inmediata</div>';
-      html+='<label class="btn-photo" for="ph-'+item.id+'">📷 Agregar foto evidencia</label>';
-      html+='<input type="file" accept="image/*" capture="environment" id="ph-'+item.id+'" style="position:absolute;width:1px;height:1px;opacity:0" onchange="handlePhoto(\''+item.id+'\',this)">';
+      html+='<div style="margin-top:10px;display:flex;gap:8px">';
+      html+='<button type="button" onclick="triggerPhoto(\''+item.id+'\',false)" style="flex:1;padding:11px;background:#F8FAFC;border:1.5px dashed #CBD5E1;border-radius:10px;font-family:Plus Jakarta Sans,sans-serif;font-size:13px;font-weight:600;color:#64748B;cursor:pointer;touch-action:manipulation">📷 Foto / Galería</button>';
+      html+='<button type="button" onclick="triggerPhoto(\''+item.id+'\',true)" style="flex:1;padding:11px;background:#F8FAFC;border:1.5px dashed #CBD5E1;border-radius:10px;font-family:Plus Jakarta Sans,sans-serif;font-size:13px;font-weight:600;color:#64748B;cursor:pointer;touch-action:manipulation">📸 Cámara</button>';
+      html+='</div>';
+      html+='<input type="file" accept="image/*" id="ph-'+item.id+'" style="display:none" onchange="handlePhoto(\''+item.id+'\',this)">';
+      html+='<input type="file" accept="image/*" capture="environment" id="ph-cam-'+item.id+'" style="display:none" onchange="handlePhoto(\''+item.id+'\',this)">';
       html+='<div id="pp-'+item.id+'"></div>';
       html+='</div>';
     });
@@ -918,6 +922,12 @@ function setAns(id,val,catId,isCrit){
 /* ══════════════════════════════════════════════════
    PHOTO
 ══════════════════════════════════════════════════ */
+function triggerPhoto(id, useCamera){
+  var inputId = useCamera ? 'ph-cam-'+id : 'ph-'+id;
+  var input = document.getElementById(inputId);
+  if(input){ input.value=''; input.click(); }
+}
+
 function handlePhoto(id,input){
   var file=input.files[0];
   if(!file)return;
