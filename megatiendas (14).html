@@ -364,9 +364,11 @@ body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(-
           <div class="tc-desc">Actividades Externas</div>
         </div>
       </div>
-      <div class="sec-h">Mis Últimas Auditorías</div>
-      <div class="sec-s">Registros recientes de este dispositivo</div>
-      <div id="sv-recent"></div>
+      <div id="sv-recent-wrap">
+        <div class="sec-h">Mis Últimas Auditorías</div>
+        <div class="sec-s">Registros recientes de este dispositivo</div>
+        <div id="sv-recent"></div>
+      </div>
     </div>
   </div>
 
@@ -740,11 +742,21 @@ function enterApp(){
   document.getElementById('f-aud').value=_user.n;
   updDT(); setInterval(updDT,30000);
 
-  // Admin nav tabs
   if(_user.role==='admin'){
+    // Admin ve todo
     document.getElementById('bn-admin').classList.remove('hidden');
     document.getElementById('bn-all').classList.remove('hidden');
+    document.getElementById('bn-hist').classList.remove('hidden');
     loadCloudData();
+  } else {
+    // Supervisores solo ven nueva auditoría
+    document.getElementById('bn-hist').classList.add('hidden');
+    document.getElementById('bn-admin').classList.add('hidden');
+    document.getElementById('bn-all').classList.add('hidden');
+    var svStats = document.getElementById('sv-stats');
+    if(svStats) svStats.style.display='none';
+    var svWrap = document.getElementById('sv-recent-wrap');
+    if(svWrap) svWrap.style.display='none';
   }
   renderDash();
   showScr('dash');
